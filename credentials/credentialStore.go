@@ -2,6 +2,8 @@ package credentials // import "github.com/Luzifer/awsenv/credentials"
 
 import (
 	"io/ioutil"
+	"os"
+	"path"
 
 	"github.com/Luzifer/awsenv/security"
 	"gopkg.in/yaml.v2"
@@ -30,6 +32,7 @@ func (a *AWSCredentialStore) SaveToFile() error {
 		return err
 	}
 
+	os.MkdirAll(path.Dir(a.storageFile), 0755)
 	err = ioutil.WriteFile(a.storageFile, enc, 0600)
 	return err
 }

@@ -30,8 +30,8 @@ go get github.com/Luzifer/awsenv
 
 ## Supported shells
 
-- bash
-  - Put this function into your `~/.bashrc` and you can access your environments using `set_aws <name>`
+- bash / zsh
+  - Put this function into your `~/.bashrc` / `~/.zshrc` and you can access your environments using `set_aws <name>`
 
 ```bash
 function set_aws {

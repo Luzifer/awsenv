@@ -9,6 +9,7 @@ import (
 
 func init() {
 	shellsupport.RegisterShellHandler("bash", bashShellHandler)
+	shellsupport.RegisterShellHandler("zsh", bashShellHandler)
 }
 
 func bashShellHandler(c credentials.AWSCredential, export bool) []string {

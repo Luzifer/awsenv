@@ -8,11 +8,11 @@ awsenv is intended as a local credential store for people using more than one AW
 - Secure storage of credentials (AES256)
 - No more access when credential store is "locked"
 - Export credentials for your shells eval function
+- Amazon STS support to open the web-console without login-hazzle
 
 ## Planned features
 - More secure unlock mechanism
   - No more storing the password in plain text on the disk
-- Amazon STS support to open the web-console without login-hazzle
 
 ## Installation
 
@@ -37,6 +37,9 @@ go get github.com/Luzifer/awsenv
 function set_aws {
   eval $(awsenv shell $1)
 }
+function login_aws {
+  open $(awsenv console $1)
+}
 ```
 
 - fish
@@ -45,6 +48,9 @@ function set_aws {
 ```fish
 function set_aws --description 'Set the AWS environment variables' --argument AWS_ENV
 	eval (awsenv shell $AWS_ENV)
+end
+function login_aws --description 'Open browser with AWS console' --argument AWS_ENV
+	open (awsenv console $AWS_ENV)
 end
 ```
 

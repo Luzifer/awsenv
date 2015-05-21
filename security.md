@@ -1,9 +1,9 @@
 # Security considerations
 
 ## Database unlock
-Currently the password for the database is stored in plain text on the disk. If any backup is run while the database is unlocked this will create a backup of the plain text password. Also an attacker with physical access to an unlocked computer can get access to that password and maybe use it to gain access to AWS accounts as soon as he gets access to the encrypted database.
+The database password is stored in a tiny HTTP server listening on a random port on localhost after the database is unlocked. This server generates a security token every 10 seconds and writes it to the disk next to the password database. This way a backup does include only the security token which was exchanged in the meantime but not the password itself.
 
-Encrypting the stored password is planned but currently I'm not aware of a real secure way to do that encryption so an attacker is not able to decrypt the password themselves.
+Also this method requires more effort from anyone trying to extract the password itself as he has to get the security token and query the password from the server within those 10s. A working method to extract the password might be to read the memory store of the server and extract the password stored in memory.
 
 ## Multi-Factor-Authentication
 For the command `awsenv console` the AWS [GetFederationToken](http://docs.aws.amazon.com/STS/latest/APIReference/API_GetFederationToken.html) API is used. This API does not have the chance to require any MFA token from the user. Instead the URL is generated and after opening the URL the user is logged in directly.

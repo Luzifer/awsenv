@@ -12,10 +12,6 @@ For security considerations about this software please refer to the [security.md
 - Export credentials for your shells eval function
 - Amazon STS support to open the web-console without login-hazzle
 
-## Planned features
-- More secure unlock mechanism
-  - No more storing the password in plain text on the disk
-
 ## Installation
 
 ### From source

@@ -17,7 +17,7 @@ For security considerations about this software please refer to the [security.md
 ### From source
 
 ```
-go get github.com/Luzifer/awsenv
+go get -u github.com/Luzifer/awsenv
 ```
 
 ### From binary

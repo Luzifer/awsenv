@@ -7,6 +7,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
+	"net/http"
+	"os"
+	"os/exec"
+	"strings"
 	"time"
 
 	"github.com/satori/go.uuid"
@@ -22,32 +26,70 @@ func LoadDatabasePasswordFromInput(input string) *DatabasePassword {
 	}
 }
 
-func LoadDatabasePasswordFromFile(filename string) (*DatabasePassword, error) {
+func LoadDatabasePasswordFromLockagent(filename string) (*DatabasePassword, error) {
 	buf, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
 
-	t := &DatabasePassword{}
-	err = t.decryptPassword(buf)
-	return t, err
+	communication := strings.Split(string(buf), "::")
+	port := communication[1]
+	token := communication[0]
+
+	r, _ := http.NewRequest("GET", fmt.Sprintf("http://127.0.0.1:%s/password", port), nil)
+	r.Header.Add("Token", token)
+	res, err := http.DefaultClient.Do(r)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	pb, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return &DatabasePassword{
+		password: strings.TrimSpace(string(pb)),
+	}, nil
 }
 
-func (p *DatabasePassword) SaveToFile(filename string) error {
-	buf, err := p.encryptPassword()
+func (p *DatabasePassword) SpawnLockAgent(filename string) error {
+	var err error
+	proc := exec.Command(os.Args[0], "lockagent")
+	proc.Env = []string{
+		fmt.Sprintf("DBFILE=%s", filename),
+		fmt.Sprintf("PASSWD=%s", p.password),
+	}
+	err = proc.Start()
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(filename, buf, 0600)
-	return err
+	err = proc.Process.Release()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
-func (p *DatabasePassword) encryptPassword() ([]byte, error) {
-	return []byte(p.password), nil
-}
+func (p *DatabasePassword) KillLockAgent(filename string) error {
+	buf, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return err
+	}
 
-func (p *DatabasePassword) decryptPassword(encrypted []byte) error {
-	p.password = string(encrypted)
+	communication := strings.Split(string(buf), "::")
+	port := communication[1]
+	token := communication[0]
+
+	r, _ := http.NewRequest("POST", fmt.Sprintf("http://127.0.0.1:%s/kill", port), nil)
+	r.Header.Add("Token", token)
+	res, err := http.DefaultClient.Do(r)
+	if err != nil {
+		return err
+	}
+	defer res.Body.Close()
+
 	return nil
 }
 

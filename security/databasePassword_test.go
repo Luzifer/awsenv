@@ -2,8 +2,6 @@ package security
 
 import (
 	"crypto/aes"
-	"io/ioutil"
-	"os"
 	"testing"
 )
 
@@ -91,24 +89,4 @@ func TestMessageIsEncrypted(t *testing.T) {
 	if len(string(msg)) != len(message) {
 		t.Error("Messages had different lengths")
 	}
-}
-
-func TestSaveAndLoad(t *testing.T) {
-	password := "test1234"
-
-	file, _ := ioutil.TempFile(os.TempDir(), "prefix")
-	defer os.Remove(file.Name())
-
-	p := LoadDatabasePasswordFromInput(password)
-	p.SaveToFile(file.Name())
-
-	p2, err := LoadDatabasePasswordFromFile(file.Name())
-	if err != nil {
-		t.Errorf("LoadDatabasePasswordFromFile errored: %s", err)
-	}
-
-	if p2.password != password {
-		t.Error("Loaded password does not match")
-	}
-
 }

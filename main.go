@@ -33,14 +33,14 @@ func main() {
 			log.SetLevel(log.DebugLevel)
 		}
 
-		if len(c.Args()) == 0 || (len(c.Args()) > 0 && c.Args()[0] != "unlock") {
+		if len(c.Args()) == 0 || (len(c.Args()) > 0 && c.Args()[0] != "unlock" && c.Args()[0] != "lockagent") {
 			if len(c.String("password")) == 0 {
 				filename := fmt.Sprintf("%s.lock", c.GlobalString("database"))
 				if _, err := os.Stat(filename); os.IsNotExist(err) {
 					log.Errorf("No password is available. Use 'unlock' or provide --password.")
 					return fmt.Errorf("No password is available. Use 'unlock' or provide --password.")
 				}
-				pwd, err := security.LoadDatabasePasswordFromFile(filename)
+				pwd, err := security.LoadDatabasePasswordFromLockagent(filename)
 				if err != nil {
 					log.Errorf("Could not load password from lock-file:\n%s", err)
 					return fmt.Errorf("Could not load password from lock-file:\n%s", err)
@@ -238,7 +238,7 @@ func main() {
 			Name:  "lock",
 			Usage: "lock the database",
 			Action: func(c *cli.Context) {
-				os.Remove(fmt.Sprintf("%s.lock", c.GlobalString("database")))
+				password.KillLockAgent(fmt.Sprintf("%s.lock", c.GlobalString("database")))
 			},
 		},
 		{
@@ -246,6 +246,8 @@ func main() {
 			Usage: "unlock the database (this will store your password on the disk!)",
 			Action: func(c *cli.Context) {
 				var pwd *security.DatabasePassword
+				var err error
+
 				if len(c.GlobalString("password")) > 0 {
 					pwd = security.LoadDatabasePasswordFromInput(c.String("password"))
 				} else {
@@ -255,10 +257,14 @@ func main() {
 					}
 					pwd = security.LoadDatabasePasswordFromInput(line)
 				}
-				err := pwd.SaveToFile(fmt.Sprintf("%s.lock", c.GlobalString("database")))
+
+				err = pwd.SpawnLockAgent(fmt.Sprintf("%s.lock", c.GlobalString("database")))
 				if err != nil {
-					log.Errorf("Unable to store password: %s", err)
+					log.Errorf("Unable to spawn lockagent: %s", err)
+					return
 				}
+
+				fmt.Println("Database unlocked.")
 			},
 		},
 		{
@@ -291,6 +297,16 @@ func main() {
 				fmt.Println(loginURL)
 			},
 		},
+	}
+
+	app.CommandNotFound = func(c *cli.Context, command string) {
+		switch command {
+		case "lockagent":
+			RunLockagent()
+		default:
+			fmt.Fprintf(c.App.Writer, "No help topic for '%v'\n", command)
+			return
+		}
 	}
 
 	app.Run(os.Args)

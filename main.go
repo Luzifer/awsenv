@@ -23,6 +23,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "awsenv"
 	app.Usage = "manage different AWS envs on your system"
+	app.Version = "0.3.0"
 
 	app.Before = func(c *cli.Context) error {
 		if c.Bool("debug") {

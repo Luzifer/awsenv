@@ -4,8 +4,6 @@ awsenv is intended as a local credential store for people using more than one AW
 
 For security considerations about this software please refer to the [security.md](https://github.com/Luzifer/awsenv/blob/master/security.md) file in this repository.
 
-**Please remember: This is alpha-software!**
-
 ## Features
 - Secure storage of credentials (AES256)
 - No more access when credential store is "locked"

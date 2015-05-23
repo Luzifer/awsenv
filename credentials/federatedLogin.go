@@ -13,9 +13,11 @@ import (
 )
 
 const (
-	IAMPolicy = `{"Version": "2012-10-17", "Statement": [{"Effect": "Allow", "Action": ["*"], "Resource": ["*"]}]}`
+	iamPolicy = `{"Version": "2012-10-17", "Statement": [{"Effect": "Allow", "Action": ["*"], "Resource": ["*"]}]}`
 )
 
+// GetConsoleLoginURL works with the AWS API to create a federation login URL to
+// the web console for the given environment which will expire after timeout
 func (a *AWSCredentialStore) GetConsoleLoginURL(env string, timeout int) (string, error) {
 	e, ok := a.Credentials[env]
 	if !ok {
@@ -42,7 +44,7 @@ func (a *AWSCredentialStore) GetConsoleLoginURL(env string, timeout int) (string
 	resp, err := svc.GetFederationToken(&sts.GetFederationTokenInput{
 		Name:            aws.String(fmt.Sprintf("awsenv-%s", username)),
 		DurationSeconds: aws.Long(int64(timeout)),
-		Policy:          aws.String(IAMPolicy),
+		Policy:          aws.String(iamPolicy),
 	})
 
 	if err != nil {
@@ -97,11 +99,14 @@ func (a *AWSCredentialStore) getFederatedSigninToken(token *sts.GetFederationTok
 	if err != nil {
 		return "", err
 	}
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 	sit := struct {
 		SigninToken string
 	}{}
-	json.NewDecoder(res.Body).Decode(&sit)
+	err = json.NewDecoder(res.Body).Decode(&sit)
+	if err != nil {
+		return "", err
+	}
 
 	return sit.SigninToken, nil
 }

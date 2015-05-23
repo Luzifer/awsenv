@@ -14,7 +14,7 @@ import (
 	"github.com/satori/go.uuid"
 )
 
-func RunLockagent() {
+func runLockagent() {
 	var token string
 	deadChan := make(chan error)
 	r := mux.NewRouter()
@@ -35,15 +35,22 @@ func RunLockagent() {
 
 	listener, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
-		log.Error("Error listening: %s", err)
+		log.Errorf("Error listening: %s", err)
 	}
-	defer listener.Close()
+	defer func() {
+		err := listener.Close()
+		if err != nil {
+			log.Errorf("Unable to close listener: %s", err)
+		}
+	}()
 
 	fmt.Println(listener.Addr().String())
 	port := strings.Split(listener.Addr().String(), ":")[1]
 
-	token = uuid.NewV4().String()
-	ioutil.WriteFile(os.Getenv("DBFILE"), []byte(fmt.Sprintf("%s::%s", token, port)), 0600)
+	token, err = writeTokenFile(port)
+	if err != nil {
+		os.Exit(1)
+	}
 
 	go func() {
 		deadChan <- http.Serve(listener, nil)
@@ -54,11 +61,26 @@ func RunLockagent() {
 	for {
 		select {
 		case <-deadChan:
-			os.Remove(os.Getenv("DBFILE"))
+			err := os.Remove(os.Getenv("DBFILE"))
+			if err != nil {
+				log.Errorf("Could not delete token file: %s", err)
+			}
 			return
 		case <-t.C:
-			token = uuid.NewV4().String()
-			ioutil.WriteFile(os.Getenv("DBFILE"), []byte(fmt.Sprintf("%s::%s", token, port)), 0600)
+			token, err = writeTokenFile(port)
+			if err != nil {
+				os.Exit(1)
+			}
 		}
 	}
+}
+
+func writeTokenFile(port string) (string, error) {
+	t := uuid.NewV4().String()
+	err := ioutil.WriteFile(os.Getenv("DBFILE"), []byte(fmt.Sprintf("%s::%s", t, port)), 0600)
+	if err != nil {
+		log.Errorf("Unable to save token file: %s", err)
+		return "", err
+	}
+	return t, nil
 }

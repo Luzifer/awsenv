@@ -16,16 +16,22 @@ import (
 	"github.com/satori/go.uuid"
 )
 
+// DatabasePassword stores a non retrievable password and includes the
+// encryption methods to store data protected with AES256
 type DatabasePassword struct {
 	password string
 }
 
+// LoadDatabasePasswordFromInput creates a new DatabasePassword store with the
+// given password
 func LoadDatabasePasswordFromInput(input string) *DatabasePassword {
 	return &DatabasePassword{
 		password: input,
 	}
 }
 
+// LoadDatabasePasswordFromLockagent calls the lock agent of awsenv to get the
+// password stored in memory for secure retrieval
 func LoadDatabasePasswordFromLockagent(filename string) (*DatabasePassword, error) {
 	buf, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -42,7 +48,7 @@ func LoadDatabasePasswordFromLockagent(filename string) (*DatabasePassword, erro
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 
 	pb, err := ioutil.ReadAll(res.Body)
 	if err != nil {
@@ -54,6 +60,7 @@ func LoadDatabasePasswordFromLockagent(filename string) (*DatabasePassword, erro
 	}, nil
 }
 
+// SpawnLockAgent spawns and detaches from a new lockagent
 func (p *DatabasePassword) SpawnLockAgent(filename string) error {
 	var err error
 	proc := exec.Command(os.Args[0], "lockagent")
@@ -72,6 +79,7 @@ func (p *DatabasePassword) SpawnLockAgent(filename string) error {
 	return nil
 }
 
+// KillLockAgent sends the lockagent a kill command using its HTTP interface
 func (p *DatabasePassword) KillLockAgent(filename string) error {
 	buf, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -88,11 +96,13 @@ func (p *DatabasePassword) KillLockAgent(filename string) error {
 	if err != nil {
 		return err
 	}
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 
 	return nil
 }
 
+// Encrypt uses the password stored in the DatabasePassword storage to encrypt
+// the given message with AES256 and returns the encrypted message for storing
 func (p *DatabasePassword) Encrypt(in []byte) ([]byte, error) {
 	rand.Seed(time.Now().UnixNano())
 	key := fmt.Sprintf("%x", sha256.Sum256([]byte(p.password)))[17 : 17+32]
@@ -113,6 +123,8 @@ func (p *DatabasePassword) Encrypt(in []byte) ([]byte, error) {
 	return out, nil
 }
 
+// Decrypt takes an encrypted message from Encrypt and decrypts it with a
+// corresponding method
 func (p *DatabasePassword) Decrypt(in []byte) ([]byte, error) {
 	key := fmt.Sprintf("%x", sha256.Sum256([]byte(p.password)))[17 : 17+32]
 	iv := in[0:aes.BlockSize]

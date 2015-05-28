@@ -87,14 +87,15 @@ func main() {
 	app.Flags().BoolVarP(&cfg.Debug, "debug", "d", false, "print debug information")
 
 	app.AddCommand(
-		getCmdList(),
-		getCmdGet(),
 		getCmdAdd(),
-		getCmdDelete(),
-		getCmdShell(),
-		getCmdLock(),
-		getCmdUnlock(),
 		getCmdConsole(),
+		getCmdDelete(),
+		getCmdGet(),
+		getCmdList(),
+		getCmdLock(),
+		getCmdShell(),
+		getCmdUnlock(),
+		getCmdVersion(),
 	)
 
 	_ = app.Execute()

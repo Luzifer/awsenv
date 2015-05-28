@@ -1,4 +1,9 @@
 
+0.4.2 / 2015-05-28
+==================
+
+  * Fix: Persistent flags were not globally available
+
 0.4.1 / 2015-05-28
 ==================
 

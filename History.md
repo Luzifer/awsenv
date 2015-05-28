@@ -1,4 +1,9 @@
 
+0.4.1 / 2015-05-28
+==================
+
+  * Fix: Do not require unlock for version command
+
 0.4.0 / 2015-05-28
 ==================
 

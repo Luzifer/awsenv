@@ -45,7 +45,7 @@ func main() {
 			}
 
 			// Load the password if command is not unlock
-			if cmd.Name() != "unlock" {
+			if !strings.Contains("unlock version", cmd.Name()) {
 
 				if len(cfg.Password) > 0 {
 					// If a password was provided, use that one

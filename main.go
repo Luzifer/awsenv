@@ -9,85 +9,84 @@ import (
 	"github.com/Luzifer/awsenv/credentials"
 	"github.com/Luzifer/awsenv/security"
 	log "github.com/Sirupsen/logrus"
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-var password *security.DatabasePassword
-var awsCredentials *credentials.AWSCredentialStore
+const (
+	version = "0.3.1"
+)
+
+var (
+	password       *security.DatabasePassword
+	awsCredentials *credentials.AWSCredentialStore
+	cfg            = &config{}
+)
 
 func init() {
 	log.SetOutput(os.Stderr)
 }
 
 func main() {
-	app := cli.NewApp()
-	app.Name = "awsenv"
-	app.Usage = "manage different AWS envs on your system"
-	app.Version = "0.3.1"
-
-	app.Before = func(c *cli.Context) error {
-		if c.Bool("debug") {
-			log.SetLevel(log.DebugLevel)
+	// Do not route special commands into cobra logic
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "lockagent":
+			runLockagent()
+			os.Exit(0)
 		}
-
-		// Load the password if command is not unlock or lockagent
-		if len(c.Args()) == 0 || (!strings.Contains("unlock||lockagent", c.Args()[0])) {
-
-			if len(c.GlobalString("password")) > 0 {
-				// If a password was provided, use that one
-				password = security.LoadDatabasePasswordFromInput(c.String("password"))
-			} else {
-				// If the token file exists a lockagent should be running and we can use
-				// the password stored in that logagent
-				filename := fmt.Sprintf("%s.lock", c.GlobalString("database"))
-				if _, err := os.Stat(filename); os.IsNotExist(err) {
-					log.Errorf("No password is available. Use 'unlock' or provide --password.")
-					return err
-				}
-				pwd, err := security.LoadDatabasePasswordFromLockagent(filename)
-				if err != nil {
-					log.Errorf("Could not load password from lock-file:\n%s", err)
-					return err
-				}
-				password = pwd
-			}
-
-			// As we got a password now try to load the database with that password or
-			// Create a new one if the encrypted storage file is not available
-			if _, err := os.Stat(c.GlobalString("database")); os.IsNotExist(err) {
-				awsCredentials = credentials.New(c.GlobalString("database"), password)
-			} else {
-				s, err := credentials.FromFile(c.GlobalString("database"), password)
-				if err != nil {
-					log.Error("Unable to read credential database")
-					return err
-				}
-				awsCredentials = s
-			}
-		}
-
-		return nil
 	}
 
-	app.Flags = []cli.Flag{
-		cli.BoolFlag{
-			Name:  "debug,d",
-			Usage: "print debug information",
-		},
-		cli.StringFlag{
-			Name:  "database",
-			Value: strings.Join([]string{os.Getenv("HOME"), ".config/awsenv"}, "/"),
-			Usage: "storage location of the database",
-		},
-		cli.StringFlag{
-			Name:   "password,p",
-			Value:  "",
-			Usage:  "password to en/decrypt the database",
-			EnvVar: "AWSENV_PASSWORD",
+	app := cobra.Command{
+		Use:   "awsenv",
+		Short: "manage different AWS envs on your system",
+		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+			if cfg.Debug {
+				log.SetLevel(log.DebugLevel)
+			}
+
+			// Load the password if command is not unlock
+			if cmd.Name() != "unlock" {
+
+				if len(cfg.Password) > 0 {
+					// If a password was provided, use that one
+					password = security.LoadDatabasePasswordFromInput(cfg.Password)
+				} else {
+					// If the token file exists a lockagent should be running and we can use
+					// the password stored in that logagent
+					filename := fmt.Sprintf("%s.lock", cfg.Database)
+					if _, err := os.Stat(filename); os.IsNotExist(err) {
+						log.Errorf("No password is available. Use 'unlock' or provide --password.")
+						os.Exit(1)
+					}
+					pwd, err := security.LoadDatabasePasswordFromLockagent(filename)
+					if err != nil {
+						log.Errorf("Could not load password from lock-file:\n%s", err)
+						os.Exit(1)
+					}
+					password = pwd
+				}
+
+				// As we got a password now try to load the database with that password or
+				// Create a new one if the encrypted storage file is not available
+				if _, err := os.Stat(cfg.Database); os.IsNotExist(err) {
+					awsCredentials = credentials.New(cfg.Database, password)
+				} else {
+					s, err := credentials.FromFile(cfg.Database, password)
+					if err != nil {
+						log.Error("Unable to read credential database")
+						os.Exit(1)
+					}
+					awsCredentials = s
+				}
+			}
 		},
 	}
 
-	app.Commands = []cli.Command{
+	app.Flags().StringVarP(&cfg.Password, "password", "p", os.Getenv("AWSENV_PASSWORD"), "password to en/decrypt the database")
+	app.Flags().StringVar(&cfg.Database, "database", strings.Join([]string{os.Getenv("HOME"), ".config/awsenv"}, "/"), "storage location of the database")
+	app.Flags().BoolVarP(&cfg.Debug, "debug", "d", false, "print debug information")
+
+	app.AddCommand(
 		getCmdList(),
 		getCmdGet(),
 		getCmdAdd(),
@@ -96,19 +95,9 @@ func main() {
 		getCmdLock(),
 		getCmdUnlock(),
 		getCmdConsole(),
-	}
+	)
 
-	app.CommandNotFound = func(c *cli.Context, command string) {
-		switch command {
-		case "lockagent":
-			runLockagent()
-		default:
-			fmt.Fprintf(c.App.Writer, "No help topic for '%v'\n", command)
-			return
-		}
-	}
-
-	_ = app.Run(os.Args)
+	_ = app.Execute()
 }
 
 func readStdinLine(prompt string) (string, error) {

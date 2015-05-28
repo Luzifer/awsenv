@@ -5,33 +5,33 @@ import (
 	"os"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-func getCmdGet() cli.Command {
-	return cli.Command{
-		Name:   "get",
-		Usage:  "print the AWS crentitals in human readable format",
-		Flags:  []cli.Flag{},
-		Action: actionCmdGet,
+func getCmdGet() *cobra.Command {
+	cmd := cobra.Command{
+		Use:   "get [environment]",
+		Short: "print the AWS crentitals in human readable format",
+		Run:   actionCmdGet,
 	}
+	return &cmd
 }
 
-func actionCmdGet(c *cli.Context) {
-	if !c.Args().Present() {
-		cli.ShowCommandHelp(c, "get")
+func actionCmdGet(cmd *cobra.Command, args []string) {
+	if len(args) < 1 {
+		cmd.Usage()
 		log.Error("Please specify the name of the environment to get")
 		os.Exit(1)
 	}
 
-	if a, ok := awsCredentials.Credentials[c.Args().First()]; ok {
-		fmt.Printf("Credentials for the '%s' environment:\n", c.Args().First())
+	if a, ok := awsCredentials.Credentials[args[0]]; ok {
+		fmt.Printf("Credentials for the '%s' environment:\n", args[0])
 		fmt.Printf(" AWS Access-Key:        %s\n", a.AWSAccessKeyID)
 		fmt.Printf(" AWS Secret-Access-Key: %s\n", a.AWSSecretAccessKey)
 		fmt.Printf(" AWS EC2-Region:        %s\n", a.AWSRegion)
 		os.Exit(0)
 	}
 
-	log.Errorf("Could not find environment '%s'", c.Args().First())
+	log.Errorf("Could not find environment '%s'", args[0])
 	os.Exit(1)
 }

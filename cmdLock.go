@@ -4,19 +4,21 @@ import (
 	"fmt"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-func getCmdLock() cli.Command {
-	return cli.Command{
-		Name:   "lock",
-		Usage:  "lock the database",
-		Action: actionCmdLock,
+func getCmdLock() *cobra.Command {
+	cmd := cobra.Command{
+		Use:   "lock",
+		Short: "lock the database",
+		Run:   actionCmdLock,
 	}
+
+	return &cmd
 }
 
-func actionCmdLock(c *cli.Context) {
-	err := password.KillLockAgent(fmt.Sprintf("%s.lock", c.GlobalString("database")))
+func actionCmdLock(cmd *cobra.Command, args []string) {
+	err := password.KillLockAgent(fmt.Sprintf("%s.lock", cfg.Database))
 	if err != nil {
 		log.Error("Unable to kill the lock agent. Is it running?")
 	}

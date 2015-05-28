@@ -7,38 +7,31 @@ import (
 
 	"github.com/Luzifer/awsenv/shellsupport"
 	log "github.com/Sirupsen/logrus"
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 
 	_ "github.com/Luzifer/awsenv/shellsupport/bash"
 	_ "github.com/Luzifer/awsenv/shellsupport/fish"
 )
 
-func getCmdShell() cli.Command {
-	return cli.Command{
-		Name:  "shell",
-		Usage: "print the AWS credentials in a format for your shell to eval()",
-		Flags: []cli.Flag{
-			cli.StringFlag{
-				Name:   "shell,s",
-				Value:  "",
-				Usage:  "name of the shell to export for",
-				EnvVar: "SHELL",
-			},
-			cli.BoolTFlag{
-				Name:  "export,x",
-				Usage: "Adds proper export options for your shell",
-			},
-		},
-		Action: actionCmdShell,
+func getCmdShell() *cobra.Command {
+	cmd := cobra.Command{
+		Use:   "shell [environment]",
+		Short: "print the AWS credentials in a format for your shell to eval()",
+		Run:   actionCmdShell,
 	}
+
+	cmd.Flags().StringVarP(&cfg.Shell.Shell, "shell", "s", os.Getenv("SHELL"), "name of the shell to export for")
+	cmd.Flags().BoolVarP(&cfg.Shell.Export, "export", "x", true, "Adds proper export options for your shell")
+
+	return &cmd
 }
 
-func actionCmdShell(c *cli.Context) {
-	if len(c.String("shell")) == 0 {
+func actionCmdShell(cmd *cobra.Command, args []string) {
+	if len(cfg.Shell.Shell) == 0 {
 		log.Errorf("Could not determine your shell. Please provide --shell")
 		os.Exit(1)
 	}
-	s := strings.Split(c.String("shell"), "/")
+	s := strings.Split(cfg.Shell.Shell, "/")
 	shell := s[len(s)-1]
 
 	log.Debugf("Found shell '%s'", shell)
@@ -49,16 +42,16 @@ func actionCmdShell(c *cli.Context) {
 		os.Exit(1)
 	}
 
-	if !c.Args().Present() {
+	if len(args) < 1 {
 		log.Errorf("Please specify the enviroment to load")
 		os.Exit(1)
 	}
 
-	if a, ok := awsCredentials.Credentials[c.Args().First()]; ok {
-		fmt.Println(strings.Join(handler(a, c.Bool("export")), "\n"))
+	if a, ok := awsCredentials.Credentials[args[0]]; ok {
+		fmt.Println(strings.Join(handler(a, cfg.Shell.Export), "\n"))
 		os.Exit(0)
 	}
 
-	log.Errorf("Could not find environment '%s'", c.Args().First())
+	log.Errorf("Could not find environment '%s'", args[0])
 	os.Exit(1)
 }

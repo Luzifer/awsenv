@@ -5,42 +5,39 @@ import (
 	"os"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-func getCmdConsole() cli.Command {
-	return cli.Command{
-		Name:  "console",
-		Usage: "prints a sign-in URL for the AWS web console",
-		Flags: []cli.Flag{
-			cli.IntFlag{
-				Name:  "duration,d",
-				Value: 8 * 60,
-				Usage: "time in minutes the sign-in is valid",
-			},
-		},
-		Action: actionCmdConsole,
+func getCmdConsole() *cobra.Command {
+	cmd := cobra.Command{
+		Use:   "console [environment] [subconsole]",
+		Short: "prints a sign-in URL for the AWS web console",
+		Run:   actionCmdConsole,
 	}
+
+	cmd.Flags().IntVarP(&cfg.Console.Duration, "duration", "d", 8*60, "time in minutes the sign-in is valid")
+
+	return &cmd
 }
 
-func actionCmdConsole(c *cli.Context) {
-	if !c.Args().Present() {
-		cli.ShowCommandHelp(c, "console")
+func actionCmdConsole(cmd *cobra.Command, args []string) {
+	if len(args) < 1 {
+		cmd.Usage()
 		log.Error("Please specify the name of the environment to create the sign-in URL for")
 		os.Exit(1)
 	}
 
-	if c.Int("duration")*60 < 900 || c.Int("duration")*60 > 129600 {
+	if cfg.Console.Duration*60 < 900 || cfg.Console.Duration*60 > 129600 {
 		log.Errorln("Duration parameter must between 15 and 2160 minutes.")
 		os.Exit(1)
 	}
 
 	subconsole := "console"
-	if len(c.Args()) == 2 {
-		subconsole = c.Args()[1]
+	if len(args) == 2 {
+		subconsole = args[1]
 	}
 
-	loginURL, err := awsCredentials.GetConsoleLoginURL(c.Args().First(), c.Int("duration")*60, subconsole)
+	loginURL, err := awsCredentials.GetConsoleLoginURL(args[0], cfg.Console.Duration*60, subconsole)
 	if err != nil {
 		log.Errorf("An error ocurred: %s", err)
 		os.Exit(1)

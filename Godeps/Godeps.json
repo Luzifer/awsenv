@@ -9,52 +9,63 @@
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/aws",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+		},
+		{
+			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/apierr",
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/endpoints",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/protocol/query",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/protocol/rest",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/protocol/xml/xmlutil",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/signer/v4",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/service/iam",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/awslabs/aws-sdk-go/service/sts",
-			"Rev": "15323f6f9596eb71b7b6ce1a9ce03430ce037e26"
-		},
-		{
-			"ImportPath": "github.com/codegangsta/cli",
-			"Comment": "1.2.0-107-g942282e",
-			"Rev": "942282e931e8286aa802a30b01fa7e16befb50f3"
+			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",
-			"Rev": "14f550f51af52180c2eefed15e5fd18d63c0a64a"
+			"Rev": "215affda49addc4c8ef7e2534915df2c8c35c6cd"
 		},
 		{
 			"ImportPath": "github.com/gorilla/mux",
-			"Rev": "660d31f8602b95058fed6833debf113e85350868"
+			"Rev": "8096f47503459bcc74d1f4c487b7e6e42e5746b5"
+		},
+		{
+			"ImportPath": "github.com/inconshreveable/mousetrap",
+			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
 			"ImportPath": "github.com/satori/go.uuid",
 			"Rev": "242673bbc820e051ef00033e274d32e08ece9e15"
+		},
+		{
+			"ImportPath": "github.com/spf13/cobra",
+			"Rev": "bba56042cf767e329430e7c7f68c3f9f640b4b8b"
+		},
+		{
+			"ImportPath": "github.com/spf13/pflag",
+			"Rev": "f1e68ce945b0710375b5cccee37318a3d13fdf8c"
 		},
 		{
 			"ImportPath": "github.com/vaughan0/go-ini",

@@ -4,29 +4,32 @@ import (
 	"os"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/codegangsta/cli"
+	"github.com/spf13/cobra"
 )
 
-func getCmdDelete() cli.Command {
-	return cli.Command{
-		Name:   "delete",
-		Usage:  "delete an AWS environment",
-		Flags:  []cli.Flag{},
-		Action: actionCmdDelete,
+func getCmdDelete() *cobra.Command {
+	cmd := cobra.Command{
+		Use:   "delete [environment]",
+		Short: "delete an AWS environment",
+		Run:   actionCmdDelete,
 	}
+
+	return &cmd
 }
 
-func actionCmdDelete(c *cli.Context) {
-	if !c.Args().Present() {
-		cli.ShowCommandHelp(c, "delete")
+func actionCmdDelete(cmd *cobra.Command, args []string) {
+	if len(args) < 1 {
+		cmd.Usage()
 		log.Error("Please specify the name of the environment to delete")
 		os.Exit(1)
 	}
-	if _, ok := awsCredentials.Credentials[c.Args().First()]; ok {
-		delete(awsCredentials.Credentials, c.Args().First())
-		log.Infof("AWS environment '%s' was successfully deleted.", c.Args().First())
+
+	if _, ok := awsCredentials.Credentials[args[0]]; ok {
+		delete(awsCredentials.Credentials, args[0])
+		awsCredentials.SaveToFile()
+		log.Infof("AWS environment '%s' was successfully deleted.", args[0])
 	} else {
-		log.Errorf("AWS environment '%s' was not found.", c.Args().First())
+		log.Errorf("AWS environment '%s' was not found.", args[0])
 		os.Exit(1)
 	}
 }

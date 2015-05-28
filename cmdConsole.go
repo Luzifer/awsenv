@@ -35,7 +35,12 @@ func actionCmdConsole(c *cli.Context) {
 		os.Exit(1)
 	}
 
-	loginURL, err := awsCredentials.GetConsoleLoginURL(c.Args().First(), c.Int("duration")*60)
+	subconsole := "console"
+	if len(c.Args()) == 2 {
+		subconsole = c.Args()[1]
+	}
+
+	loginURL, err := awsCredentials.GetConsoleLoginURL(c.Args().First(), c.Int("duration")*60, subconsole)
 	if err != nil {
 		log.Errorf("An error ocurred: %s", err)
 		os.Exit(1)

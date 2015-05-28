@@ -18,7 +18,7 @@ const (
 
 // GetConsoleLoginURL works with the AWS API to create a federation login URL to
 // the web console for the given environment which will expire after timeout
-func (a *AWSCredentialStore) GetConsoleLoginURL(env string, timeout int) (string, error) {
+func (a *AWSCredentialStore) GetConsoleLoginURL(env string, timeout int, subconsole string) (string, error) {
 	e, ok := a.Credentials[env]
 	if !ok {
 		return "", fmt.Errorf("Environment '%s' was not found.", env)
@@ -59,7 +59,7 @@ func (a *AWSCredentialStore) GetConsoleLoginURL(env string, timeout int) (string
 	p := url.Values{
 		"Action":      []string{"login"},
 		"Issuer":      []string{"https://github.com/Luzifer/awsenv"},
-		"Destination": []string{fmt.Sprintf("https://console.aws.amazon.com/console/home?region=%s", e.AWSRegion)},
+		"Destination": []string{fmt.Sprintf("https://console.aws.amazon.com/%s/home?region=%s", subconsole, e.AWSRegion)},
 		"SigninToken": []string{signinToken},
 	}
 	out := url.URL{

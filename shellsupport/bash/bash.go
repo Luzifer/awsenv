@@ -24,5 +24,6 @@ func bashShellHandler(c credentials.AWSCredential, export bool) []string {
 		fmt.Sprintf("%s AWS_SECRET_KEY=%s;", flags, c.AWSSecretAccessKey),
 		fmt.Sprintf("%s AWS_SECRET_ACCESS_KEY=%s;", flags, c.AWSSecretAccessKey),
 		fmt.Sprintf("%s EC2_REGION=%s;", flags, c.AWSRegion),
+		fmt.Sprintf("%s AWS_REGION=%s;", flags, c.AWSRegion),
 	}
 }

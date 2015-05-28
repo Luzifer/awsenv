@@ -1,4 +1,11 @@
 
+0.4.0 / 2015-05-28
+==================
+
+  * Moved to spf13/cobra as CLI framework
+  * Added support for direct jump to subconsole
+  * Set AWS\_REGION in awsenv shell command
+
 0.3.1 / 2015-05-23
 ==================
 

@@ -12,6 +12,13 @@ For security considerations about this software please refer to the [security.md
 
 ## Installation
 
+### Using Homebrew
+
+1. Add my tap to Homebrew:  
+  `brew tap Luzifer/tools`
+2. Install awsenv:  
+  `brew install awsenv`
+
 ### From source
 
 ```
@@ -65,18 +72,18 @@ $ sudo mv awsenv/awsenv /usr/local/bin/
 ### Adding an environment and using it
 ```bash
 # We can not list because the credentials are locked
-$ awsenv list           
+$ awsenv list
 ERRO[0000] No password is available. Use 'unlock' or provide --password.
 
 # Unlock the credentials (now the password is set for later)
-$ awsenv unlock                             
+$ awsenv unlock
 Password: demo
 
 # We can now list without errors but have no environments
-$ awsenv list                               
+$ awsenv list
 
 # Lets add an environment
-$ awsenv add --region eu-west-1 demoenv     
+$ awsenv add --region eu-west-1 demoenv
 AWS Access-Key: myaccesskey
 AWS Secret-Access-Key: mysecretkey
 INFO[0010] Credential 'demoenv' has been created

@@ -84,7 +84,7 @@ func main() {
 
 	app.PersistentFlags().StringVarP(&cfg.Password, "password", "p", os.Getenv("AWSENV_PASSWORD"), "password to en/decrypt the database")
 	app.PersistentFlags().StringVar(&cfg.Database, "database", strings.Join([]string{os.Getenv("HOME"), ".config/awsenv"}, "/"), "storage location of the database")
-	app.PersistentFlags().BoolVarP(&cfg.Debug, "debug", "d", false, "print debug information")
+	app.PersistentFlags().BoolVar(&cfg.Debug, "debug", false, "print debug information")
 
 	app.AddCommand(
 		getCmdAdd(),

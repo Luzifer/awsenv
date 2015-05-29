@@ -1,4 +1,9 @@
 
+0.4.3 / 2015-05-29
+==================
+
+  * Fix: Shorthand "-d" was duplicated in console command
+
 0.4.2 / 2015-05-28
 ==================
 

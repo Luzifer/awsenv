@@ -1,4 +1,10 @@
 
+0.5.0 / 2015-06-23
+==================
+
+  * Added command "prompt"
+  * Added instructions for Homebrew
+
 0.4.3 / 2015-05-29
 ==================
 

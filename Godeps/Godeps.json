@@ -8,40 +8,44 @@
 			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/aws",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/aws",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/apierr",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/internal/endpoints",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/endpoints",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/query",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/protocol/query",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/rest",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/protocol/rest",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/xml/xmlutil",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/protocol/xml/xmlutil",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/internal/signer/v4",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/internal/signer/v4",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/service/iam",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/service/iam",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
-		},
-		{
-			"ImportPath": "github.com/awslabs/aws-sdk-go/service/sts",
-			"Rev": "edb939203c7444ebb16b7d4c40c16124f53b6266"
+			"ImportPath": "github.com/aws/aws-sdk-go/service/sts",
+			"Comment": "v0.6.3-2-g8bdb252",
+			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",

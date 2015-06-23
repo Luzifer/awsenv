@@ -124,6 +124,10 @@ AWS_ACCESS_KEY_ID=myaccesskey
 AWS_ACCESS_KEY=myaccesskey
 AWS_SECRET_KEY=mysecretkey
 
+# Now the prompt command can tell you which env is set
+$ awsenv prompt
+demoenv
+
 # Lets try to unlock with a wrong password
 $ awsenv lock
 $ awsenv unlock

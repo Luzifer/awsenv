@@ -17,7 +17,7 @@ func getCmdAdd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&cfg.Add.AccessKey, "access-key", "a", "", "the AWSAccessKey")
 	cmd.Flags().StringVarP(&cfg.Add.SecretAccessKey, "secret-access-key", "s", "", "the AWSSecretAccessKey")
-	cmd.Flags().StringVarP(&cfg.Add.Region, "region", "r", "us-east-1", "the default AWS EC2 cfg.Add.Region for this credential set")
+	cmd.Flags().StringVarP(&cfg.Add.Region, "region", "r", "us-east-1", "the default AWS EC2 region for this credential set")
 
 	return &cmd
 }

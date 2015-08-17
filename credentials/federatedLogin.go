@@ -43,7 +43,7 @@ func (a *AWSCredentialStore) GetConsoleLoginURL(env string, timeout int, subcons
 
 	resp, err := svc.GetFederationToken(&sts.GetFederationTokenInput{
 		Name:            aws.String(fmt.Sprintf("awsenv-%s", username)),
-		DurationSeconds: aws.Long(int64(timeout)),
+		DurationSeconds: aws.Int64(int64(timeout)),
 		Policy:          aws.String(iamPolicy),
 	})
 

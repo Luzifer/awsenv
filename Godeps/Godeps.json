@@ -9,43 +9,43 @@
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/aws",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/endpoints",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/query",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/rest",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/xml/xmlutil",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/signer/v4",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/service/iam",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/service/sts",
-			"Comment": "v0.6.3-2-g8bdb252",
-			"Rev": "8bdb2521482f442bbab55cc9f716231d69565581"
+			"Comment": "v0.7.1-4-g1c75632",
+			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",
@@ -65,11 +65,11 @@
 		},
 		{
 			"ImportPath": "github.com/spf13/cobra",
-			"Rev": "bba56042cf767e329430e7c7f68c3f9f640b4b8b"
+			"Rev": "385fc87e4343efec233811d3d933509e8975d11a"
 		},
 		{
 			"ImportPath": "github.com/spf13/pflag",
-			"Rev": "f1e68ce945b0710375b5cccee37318a3d13fdf8c"
+			"Rev": "67cbc198fd11dab704b214c1e629a97af392c085"
 		},
 		{
 			"ImportPath": "github.com/vaughan0/go-ini",

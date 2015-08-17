@@ -1,4 +1,9 @@
 
+0.5.3 / 2015-08-17
+==================
+
+  * Fix: Description for AWS region contained variable name
+
 0.5.2 / 2015-08-17
 ==================
 

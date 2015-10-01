@@ -1,75 +1,89 @@
 {
 	"ImportPath": "github.com/Luzifer/awsenv",
-	"GoVersion": "go1.4.2",
+	"GoVersion": "go1.5.1",
 	"Deps": [
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",
-			"Comment": "v0.7.3",
-			"Rev": "55eb11d21d2a31a3cc93838241d04800f52e823d"
+			"Comment": "v0.8.7",
+			"Rev": "418b41d23a1bf978c06faea5313ba194650ac088"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/aws",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/endpoints",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/query",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/rest",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/protocol/xml/xmlutil",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/internal/signer/v4",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/service/iam",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/service/sts",
-			"Comment": "v0.7.1-4-g1c75632",
-			"Rev": "1c75632eb9b77bb3d8e6416fbd8f3e98fc1367db"
+			"Comment": "v0.9.10",
+			"Rev": "661aeb3339ad9bd5fd420752ebf18a651d40413e"
+		},
+		{
+			"ImportPath": "github.com/cpuguy83/go-md2man/md2man",
+			"Comment": "v1.0.4",
+			"Rev": "71acacd42f85e5e82f70a55327789582a5200a90"
 		},
 		{
 			"ImportPath": "github.com/gorilla/context",
-			"Rev": "215affda49addc4c8ef7e2534915df2c8c35c6cd"
+			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
 		},
 		{
 			"ImportPath": "github.com/gorilla/mux",
-			"Rev": "8096f47503459bcc74d1f4c487b7e6e42e5746b5"
+			"Rev": "49c024275504f0341e5a9971eb7ba7fa3dc7af40"
 		},
 		{
 			"ImportPath": "github.com/inconshreveable/mousetrap",
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
+			"ImportPath": "github.com/russross/blackfriday",
+			"Comment": "v1.3",
+			"Rev": "8cec3a854e68dba10faabbe31c089abf4a3e57a6"
+		},
+		{
 			"ImportPath": "github.com/satori/go.uuid",
-			"Rev": "242673bbc820e051ef00033e274d32e08ece9e15"
+			"Rev": "08f0718b61e95ddba0ade3346725fe0e4bf28ca6"
+		},
+		{
+			"ImportPath": "github.com/shurcooL/sanitized_anchor_name",
+			"Rev": "244f5ac324cb97e1987ef901a0081a77bfd8e845"
 		},
 		{
 			"ImportPath": "github.com/spf13/cobra",
-			"Rev": "385fc87e4343efec233811d3d933509e8975d11a"
+			"Rev": "d732ab3a34e6e9e6b5bdac80707c2b6bad852936"
 		},
 		{
 			"ImportPath": "github.com/spf13/pflag",
-			"Rev": "67cbc198fd11dab704b214c1e629a97af392c085"
+			"Rev": "b084184666e02084b8ccb9b704bf0d79c466eb1d"
 		},
 		{
 			"ImportPath": "github.com/vaughan0/go-ini",
@@ -77,7 +91,7 @@
 		},
 		{
 			"ImportPath": "gopkg.in/yaml.v2",
-			"Rev": "49c95bdc21843256fb6c4e0d370a05f24a0bf213"
+			"Rev": "53feefa2559fb8dfa8d81baad31be332c97d6c77"
 		}
 	]
 }

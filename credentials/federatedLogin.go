@@ -79,7 +79,7 @@ func (a *AWSCredentialStore) getFederatedSigninToken(token *sts.GetFederationTok
 		SessionKey   string `json:"sessionKey"`
 		SessionToken string `json:"sessionToken"`
 	}{
-		SessionID:    *token.Credentials.AccessKeyID,
+		SessionID:    *token.Credentials.AccessKeyId,
 		SessionKey:   *token.Credentials.SecretAccessKey,
 		SessionToken: *token.Credentials.SessionToken,
 	})

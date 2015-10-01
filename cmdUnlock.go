@@ -5,6 +5,7 @@ import (
 
 	"github.com/Luzifer/awsenv/security"
 	log "github.com/Sirupsen/logrus"
+	"github.com/bgentry/speakeasy"
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +26,7 @@ func actionCmdUnlock(cmd *cobra.Command, args []string) {
 	if len(cfg.Password) > 0 {
 		pwd = security.LoadDatabasePasswordFromInput(cfg.Password)
 	} else {
-		line, err := readStdinLine("Password: ")
+		line, err := speakeasy.Ask("Password: ")
 		if err != nil {
 			log.Errorln(err)
 		}

@@ -128,6 +128,15 @@ AWS_SECRET_KEY=mysecretkey
 $ awsenv prompt
 demoenv
 
+# You also can run commands with AWS crentials directly
+$ awsenv run demoenv -- env | grep AWS
+AWS_ACCESS_KEY_ID=myaccesskey
+AWS_SECRET_ACCESS_KEY=mysecretkey
+AWS_ACCESS_KEY=myaccesskey
+AWS_SECRET_KEY=mysecretkey
+AWS_REGION=us-east-1
+AWS_DEFAULT_REGION=us-east-1
+
 # Lets try to unlock with a wrong password
 $ awsenv lock
 $ awsenv unlock

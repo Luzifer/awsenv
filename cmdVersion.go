@@ -13,7 +13,7 @@ func getCmdVersion() *cobra.Command {
 		Short:   "prints the current version of awsenv",
 		Run:     actionCmdVersion,
 	}
-  
+
 	return &cmd
 }
 

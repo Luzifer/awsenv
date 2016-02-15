@@ -94,6 +94,7 @@ func main() {
 		getCmdList(),
 		getCmdLock(),
 		getCmdShell(),
+		getCmdRun(),
 		getCmdPrompt(),
 		getCmdUnlock(),
 		getCmdVersion(),

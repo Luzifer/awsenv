@@ -88,6 +88,7 @@ func main() {
 
 	app.AddCommand(
 		getCmdAdd(),
+		getCmdChangePassword(),
 		getCmdConsole(),
 		getCmdDelete(),
 		getCmdGet(),

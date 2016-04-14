@@ -44,6 +44,13 @@ func (a *AWSCredentialStore) SaveToFile() error {
 	return err
 }
 
+// UpdatePassword changes the password of the store and saves the store encrypted
+// with the new password back to its file
+func (a *AWSCredentialStore) UpdatePassword(passwd string) error {
+	a.databasePassword = security.LoadDatabasePasswordFromInput(passwd)
+	return a.SaveToFile()
+}
+
 // FromFile loads an AWSCredentialStore from the given file and decrypts it
 func FromFile(filename string, pass *security.DatabasePassword) (*AWSCredentialStore, error) {
 	enc, err := ioutil.ReadFile(filename)

@@ -1,4 +1,10 @@
 
+0.9.0 / 2016-04-14
+==================
+
+  * Added `awsenv passwd` command to change password
+  * Updated README, executed `go fmt`
+
 0.8.0 / 2016-02-15
 ==================
 

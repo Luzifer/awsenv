@@ -19,4 +19,8 @@ type config struct {
 		Shell  string
 		Export bool
 	}
+
+	LockAgent struct {
+		Timeout string
+	}
 }

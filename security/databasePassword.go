@@ -61,11 +61,12 @@ func LoadDatabasePasswordFromLockagent(filename string) (*DatabasePassword, erro
 }
 
 // SpawnLockAgent spawns and detaches from a new lockagent
-func (p *DatabasePassword) SpawnLockAgent(filename string) error {
+func (p *DatabasePassword) SpawnLockAgent(filename, agentTimeout string) error {
 	var err error
 	proc := exec.Command(os.Args[0], "lockagent")
 	proc.Env = []string{
 		fmt.Sprintf("DBFILE=%s", filename),
+		fmt.Sprintf("TIMEOUT=%s", agentTimeout),
 		fmt.Sprintf("PASSWD=%s", p.password),
 	}
 	err = proc.Start()

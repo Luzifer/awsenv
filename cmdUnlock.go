@@ -16,6 +16,8 @@ func getCmdUnlock() *cobra.Command {
 		Run:   actionCmdUnlock,
 	}
 
+	cmd.Flags().StringVar(&cfg.LockAgent.Timeout, "timeout", "30m", "Lock awsenv after this time (set to 0 to disable)")
+
 	return &cmd
 }
 
@@ -33,7 +35,7 @@ func actionCmdUnlock(cmd *cobra.Command, args []string) {
 		pwd = security.LoadDatabasePasswordFromInput(line)
 	}
 
-	err = pwd.SpawnLockAgent(fmt.Sprintf("%s.lock", cfg.Database))
+	err = pwd.SpawnLockAgent(fmt.Sprintf("%s.lock", cfg.Database), cfg.LockAgent.Timeout)
 	if err != nil {
 		log.Errorf("Unable to spawn lockagent: %s", err)
 		return

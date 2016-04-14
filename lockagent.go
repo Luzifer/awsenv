@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -57,6 +58,16 @@ func runLockagent() {
 	}()
 
 	t := time.NewTicker(10 * time.Second)
+
+	if timeoutRaw := os.Getenv("TIMEOUT"); timeoutRaw != "" && timeoutRaw != "0" {
+		timeout, err := time.ParseDuration(timeoutRaw)
+		if err == nil {
+			go func(timeout time.Duration) {
+				<-time.After(timeout)
+				deadChan <- errors.New("Agent timeout")
+			}(timeout)
+		}
+	}
 
 	for {
 		select {

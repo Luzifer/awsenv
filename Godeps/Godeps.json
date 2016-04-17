@@ -1,6 +1,7 @@
 {
 	"ImportPath": "github.com/Luzifer/awsenv",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v60",
 	"Deps": [
 		{
 			"ImportPath": "github.com/Sirupsen/logrus",

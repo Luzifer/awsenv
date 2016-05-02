@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 	"time"
 
@@ -88,6 +89,9 @@ func runLockagent() {
 
 func writeTokenFile(port string) (string, error) {
 	t := uuid.NewV4().String()
+	if err := os.MkdirAll(path.Dir(os.Getenv("DBFILE")), 0755); err != nil {
+		return "", err
+	}
 	err := ioutil.WriteFile(os.Getenv("DBFILE"), []byte(fmt.Sprintf("%s::%s", t, port)), 0600)
 	if err != nil {
 		log.Errorf("Unable to save token file: %s", err)

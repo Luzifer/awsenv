@@ -1,3 +1,7 @@
+# 0.10.2 / 2016-05-02
+
+  * Fix: Ensure directories for token-file are created
+
 
 0.10.1 / 2016-04-17
 ==================

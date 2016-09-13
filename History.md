@@ -1,3 +1,7 @@
+# 0.11.0 / 2016-09-13
+
+  * Drop &#34;awsenv-&#34; prefix in username
+
 # 0.10.2 / 2016-05-02
 
   * Fix: Ensure directories for token-file are created
@@ -57,13 +61,13 @@
 0.5.0 / 2015-06-23
 ==================
 
-  * Added command "prompt"
+  * Added command &#34;prompt&#34;
   * Added instructions for Homebrew
 
 0.4.3 / 2015-05-29
 ==================
 
-  * Fix: Shorthand "-d" was duplicated in console command
+  * Fix: Shorthand &#34;-d&#34; was duplicated in console command
 
 0.4.2 / 2015-05-28
 ==================

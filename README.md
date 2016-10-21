@@ -27,9 +27,8 @@ go get -u github.com/Luzifer/awsenv
 
 ### From binary
 
-1. Go to the [GoBuilder builds page](https://gobuilder.me/github.com/Luzifer/awsenv)
-2. Download the ZIP for your system
-3. Unpack and put the `awsenv` file into your `$PATH`
+1. Go to the [releases page](https://github.com/Luzifer/awsenv/releases)
+2. Download the binary for your system and put into your `$PATH`
 
 ## Supported shells
 

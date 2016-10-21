@@ -1,3 +1,8 @@
+# 0.11.1 / 2016-10-21
+
+  * Build and push to Github releases
+  * Remove hardcoded version from source
+
 # 0.11.0 / 2016-09-13
 
   * Drop &#34;awsenv-&#34; prefix in username

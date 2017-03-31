@@ -15,6 +15,7 @@ func getCmdAdd() *cobra.Command {
 		Run:   actionCmdAdd,
 	}
 
+	cmd.Flags().StringVarP(&cfg.Add.Profile, "x-profile", "x", "", "the profile name")
 	cmd.Flags().StringVarP(&cfg.Add.AccessKey, "access-key", "a", "", "the AWSAccessKey")
 	cmd.Flags().StringVarP(&cfg.Add.SecretAccessKey, "secret-access-key", "s", "", "the AWSSecretAccessKey")
 	cmd.Flags().StringVarP(&cfg.Add.Region, "region", "r", "us-east-1", "the default AWS EC2 region for this credential set")
@@ -30,6 +31,13 @@ func actionCmdAdd(cmd *cobra.Command, args []string) {
 	}
 
 	var err error
+	if len(cfg.Add.Profile) == 0 {
+		cfg.Add.Profile, err = readStdinLine("AWS Profile: ")
+		if err != nil {
+			log.Errorf("An error ocurred: %s", err)
+			os.Exit(1)
+		}
+	}
 	if len(cfg.Add.AccessKey) == 0 {
 		cfg.Add.AccessKey, err = readStdinLine("AWS Access-Key: ")
 		if err != nil {
@@ -46,6 +54,7 @@ func actionCmdAdd(cmd *cobra.Command, args []string) {
 	}
 
 	cred := credentials.AWSCredential{
+		AWSProfile:         cfg.Add.Profile,
 		AWSAccessKeyID:     cfg.Add.AccessKey,
 		AWSSecretAccessKey: cfg.Add.SecretAccessKey,
 		AWSRegion:          cfg.Add.Region,

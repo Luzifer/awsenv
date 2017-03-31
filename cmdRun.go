@@ -33,6 +33,7 @@ func actionCmdRun(cmd *cobra.Command, args []string) {
 		cmd.Stderr = os.Stderr
 
 		env := envListToMap(os.Environ())
+		env["AWS_PROFILE"] = a.AWSProfile
 		env["AWS_ACCESS_KEY"] = a.AWSAccessKeyID
 		env["AWS_ACCESS_KEY_ID"] = a.AWSAccessKeyID
 		env["AWS_SECRET_KEY"] = a.AWSSecretAccessKey

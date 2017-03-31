@@ -6,6 +6,7 @@ type config struct {
 	Password string
 
 	Add struct {
+		Profile         string
 		AccessKey       string
 		SecretAccessKey string
 		Region          string

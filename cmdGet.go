@@ -26,6 +26,7 @@ func actionCmdGet(cmd *cobra.Command, args []string) {
 
 	if a, ok := awsCredentials.Credentials[args[0]]; ok {
 		fmt.Printf("Credentials for the '%s' environment:\n", args[0])
+		fmt.Printf(" AWS Profile:           %s\n", a.AWSProfile)
 		fmt.Printf(" AWS Access-Key:        %s\n", a.AWSAccessKeyID)
 		fmt.Printf(" AWS Secret-Access-Key: %s\n", a.AWSSecretAccessKey)
 		fmt.Printf(" AWS EC2-Region:        %s\n", a.AWSRegion)

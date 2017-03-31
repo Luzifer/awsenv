@@ -18,6 +18,7 @@ type AWSCredentialStore struct {
 
 // AWSCredential holds the credential set for an environment
 type AWSCredential struct {
+    AWSProfile         string
 	AWSAccessKeyID     string
 	AWSSecretAccessKey string
 	AWSRegion          string

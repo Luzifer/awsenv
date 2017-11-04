@@ -21,11 +21,11 @@ set -x
 go get github.com/aktau/github-release
 go get github.com/mitchellh/gox
 
-github-release release --user Luzifer --repo ${REPO} --tag ${VERSION} --name ${VERSION} --draft || true
+github-release release --user mauromedda --repo ${REPO} --tag ${VERSION} --name ${VERSION} --draft || true
 
 gox -ldflags="-X main.version=${VERSION}" -osarch="${ARCHS}"
-sha256sum ${REPO}_* > SHA256SUMS
+shasum -a 256 ${REPO}_* > SHA256SUMS
 
 for file in ${REPO}_* SHA256SUMS; do
-  github-release upload --user Luzifer --repo ${REPO} --tag ${VERSION} --name ${file} --file ${file}
+  github-release upload --user mauromedda --repo ${REPO} --tag ${VERSION} --name ${file} --file ${file}
 done

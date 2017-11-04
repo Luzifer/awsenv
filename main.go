@@ -82,9 +82,17 @@ func main() {
 		},
 	}
 
-	app.PersistentFlags().StringVarP(&cfg.Password, "password", "p", os.Getenv("AWSENV_PASSWORD"), "password to en/decrypt the database")
+	app.PersistentFlags().StringVarP(&cfg.Password, "password", "p", "", "password to en/decrypt the database")
 	app.PersistentFlags().StringVar(&cfg.Database, "database", strings.Join([]string{os.Getenv("HOME"), ".config/awsenv"}, "/"), "storage location of the database")
 	app.PersistentFlags().BoolVar(&cfg.Debug, "debug", false, "print debug information")
+
+	if dbfile, ok := os.LookupEnv("AWSENV_DBFILE"); ok {
+		cfg.Database = dbfile
+	}
+
+	if pwd, ok := os.LookupEnv("AWSENV_PASSWORD"); ok {
+		cfg.Password = pwd
+	}
 
 	app.AddCommand(
 		getCmdAdd(),

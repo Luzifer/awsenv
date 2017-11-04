@@ -1,8 +1,8 @@
-# Luzifer / awsenv
+# mauromedda / awsenv
 
 awsenv is intended as a local credential store for people using more than one AWS account at the same time.
 
-For security considerations about this software please refer to the [security.md](https://github.com/Luzifer/awsenv/blob/master/security.md) file in this repository.
+For security considerations about this software please refer to the [security.md](https://github.com/mauromedda/awsenv/blob/master/security.md) file in this repository.
 
 ## Features
 - Secure storage of credentials (AES256)
@@ -15,19 +15,19 @@ For security considerations about this software please refer to the [security.md
 ### Using Homebrew
 
 1. Add my tap to Homebrew:  
-  `brew tap Luzifer/tools`
+  `brew tap mauromedda/tools`
 2. Install awsenv:  
   `brew install awsenv`
 
 ### From source
 
 ```
-go get -u github.com/Luzifer/awsenv
+go get -u github.com/mauromedda/awsenv
 ```
 
 ### From binary
 
-1. Go to the [releases page](https://github.com/Luzifer/awsenv/releases)
+1. Go to the [releases page](https://github.com/mauromedda/awsenv/releases)
 2. Download the binary for your system and put into your `$PATH`
 
 ## Supported shells
@@ -60,7 +60,7 @@ end
 
 ### Installation
 ```bash
-$ wget -q https://gobuilder.me/get/github.com/Luzifer/awsenv/awsenv_master_linux-amd64.zip
+$ wget -q https://gobuilder.me/get/github.com/mauromedda/awsenv/awsenv_master_linux-amd64.zip
 $ unzip awsenv_master_linux-amd64.zip
 Archive:  awsenv_master_linux-amd64.zip
    creating: awsenv/

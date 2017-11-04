@@ -1,3 +1,10 @@
+# 0.11.2 / 2017-11-04
+
+  * Build and push to Github
+  * Add support for DBFILE specification through environment variable AWSENV_DBFILE
+  * Security: Remove the printing value for password passed through env var AWSENV_PASSWORD in the command help
+  * Update the History file
+
 # 0.11.1 / 2016-10-21
 
   * Build and push to Github releases

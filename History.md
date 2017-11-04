@@ -1,3 +1,7 @@
+# 0.11.3 / 2017-11-04
+
+  * go fmt
+
 # 0.11.2 / 2017-11-04
 
   * Build and push to Github

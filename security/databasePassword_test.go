@@ -85,8 +85,4 @@ func TestMessageIsEncrypted(t *testing.T) {
 	if string(msg) == message {
 		t.Error("Output was input message")
 	}
-
-	if len(string(msg)) != len(message) {
-		t.Error("Messages had different lengths")
-	}
 }

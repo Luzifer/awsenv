@@ -17,6 +17,4 @@ Because of this the `awsenv` command does not support login to AWS web console u
 One solution against this would be to secure the whole `awsenv` command using an own MFA token to be entered with every request made by the user.
 
 ## Encryption on disk
-The credential database stored on the users computer at `~/.config/awsenv` is encrypted using an AES encryption with a 32 byte key commonly known as AES256. The initialization vector is generated randomly at every save of the database and does not make direct attacks to the credential store possible.
-
-Also it is not possible to decrypt the raw value stored in the credential database with just knowing the password itself as the key used to encrypt the database is not the password itself but [derived](https://github.com/Luzifer/awsenv/blob/master/security/databasePassword.go#L56) from the password.
+The credential database stored on the users computer at `~/.config/awsenv` is encrypted using an AES-256-CBC encryption compatible to OpenSSL encryption mechanisms.

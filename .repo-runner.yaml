@@ -4,7 +4,7 @@ image: "quay.io/luzifer/repo-runner-image"
 checkout_dir: /go/src/github.com/Luzifer/awsenv
 
 commands:
-  - make ci
+  - make publish
 
 environment:
   CGO_ENABLED: 0

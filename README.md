@@ -1,3 +1,8 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/Luzifer/awsenv)](https://goreportcard.com/report/github.com/Luzifer/awsenv)
+![](https://badges.fyi/github/license/Luzifer/awsenv)
+![](https://badges.fyi/github/downloads/Luzifer/awsenv)
+![](https://badges.fyi/github/latest-release/Luzifer/awsenv)
+
 # Luzifer / awsenv
 
 awsenv is intended as a local credential store for people using more than one AWS account at the same time.
@@ -11,13 +16,6 @@ For security considerations about this software please refer to the [security.md
 - Amazon STS support to open the web-console without login-hazzle
 
 ## Installation
-
-### Using Homebrew
-
-1. Add my tap to Homebrew:  
-  `brew tap Luzifer/tools`
-2. Install awsenv:  
-  `brew install awsenv`
 
 ### From source
 
@@ -60,12 +58,9 @@ end
 
 ### Installation
 ```bash
-$ wget -q https://gobuilder.me/get/github.com/Luzifer/awsenv/awsenv_master_linux-amd64.zip
-$ unzip awsenv_master_linux-amd64.zip
-Archive:  awsenv_master_linux-amd64.zip
-   creating: awsenv/
-  inflating: awsenv/awsenv
-$ sudo mv awsenv/awsenv /usr/local/bin/
+$ curl -sSLfo awsenv https://github.com/Luzifer/awsenv/releases/download/v0.11.1/awsenv_linux_amd64
+$ chmod 0755 awsenv
+$ sudo mv awsenv /usr/local/bin/
 ```
 
 ### Adding an environment and using it

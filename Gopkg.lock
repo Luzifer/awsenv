@@ -15,30 +15,27 @@
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/defaults","aws/ec2metadata","aws/request","aws/service","aws/service/serviceinfo","internal/endpoints","internal/protocol/query","internal/protocol/query/queryutil","internal/protocol/rest","internal/protocol/xml/xmlutil","internal/signer/v4","service/iam","service/sts"]
-  revision = "661aeb3339ad9bd5fd420752ebf18a651d40413e"
-  version = "v0.9.10"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/defaults","aws/ec2metadata","aws/request","aws/service","aws/service/serviceinfo","private/endpoints","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","private/signer/v4","service/iam","service/sts"]
+  revision = "1481c919816453abc15fbe2cd6e071dfc2f188a0"
+  version = "v0.9.17"
 
 [[projects]]
   name = "github.com/bgentry/speakeasy"
   packages = ["."]
-  revision = "36e9cfdd690967f4f690c6edcc9ffacd006014a0"
-
-[[projects]]
-  name = "github.com/cpuguy83/go-md2man"
-  packages = ["md2man"]
-  revision = "71acacd42f85e5e82f70a55327789582a5200a90"
-  version = "v1.0.4"
+  revision = "4aabc24848ce5fd31929f7d1e4ea74d3709c14cd"
+  version = "v0.1.0"
 
 [[projects]]
   name = "github.com/gorilla/context"
   packages = ["."]
-  revision = "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+  revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
+  version = "v1.1"
 
 [[projects]]
   name = "github.com/gorilla/mux"
   packages = ["."]
-  revision = "49c024275504f0341e5a9971eb7ba7fa3dc7af40"
+  revision = "24fca303ac6da784b9e8269f724ddeb0b2eea5e7"
+  version = "v1.5.0"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -47,30 +44,22 @@
   version = "v1.0"
 
 [[projects]]
-  name = "github.com/russross/blackfriday"
-  packages = ["."]
-  revision = "8cec3a854e68dba10faabbe31c089abf4a3e57a6"
-  version = "v1.3"
-
-[[projects]]
   name = "github.com/satori/go.uuid"
   packages = ["."]
-  revision = "08f0718b61e95ddba0ade3346725fe0e4bf28ca6"
-
-[[projects]]
-  name = "github.com/shurcooL/sanitized_anchor_name"
-  packages = ["."]
-  revision = "244f5ac324cb97e1987ef901a0081a77bfd8e845"
+  revision = "879c5887cd475cd7864858769793b2ceb0d44feb"
+  version = "v1.1.0"
 
 [[projects]]
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "d732ab3a34e6e9e6b5bdac80707c2b6bad852936"
+  revision = "7b2c5ac9fc04fc5efafb60700713d4fa609b777b"
+  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/spf13/pflag"
   packages = ["."]
-  revision = "b084184666e02084b8ccb9b704bf0d79c466eb1d"
+  revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -79,9 +68,10 @@
   revision = "a98ad7ee00ec53921f08832bc06ecf7fd600e6a1"
 
 [[projects]]
+  branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "53feefa2559fb8dfa8d81baad31be332c97d6c77"
+  revision = "eb3733d160e74a9c7e442f435eb3bea458e1d19f"
 
 [solve-meta]
   analyzer-name = "dep"

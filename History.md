@@ -1,3 +1,10 @@
+# 0.12.0 / 2017-11-05
+
+  * Replace arbitrary encryption with OpenSSL compatible one  
+    This enables users to access their credentials without being dependent on this tool. The previously used files will be converted at next write, old files are still usable and are read correctly.
+  * Switch to dep for dependency management
+  * Update dependencies to latest version
+
 # 0.11.1 / 2016-10-21
 
   * Build and push to Github releases

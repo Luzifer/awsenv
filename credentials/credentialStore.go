@@ -36,6 +36,10 @@ func (a *AWSCredentialStore) SaveToFile() error {
 		return err
 	}
 
+	// We don't care about that newline at the end, OpenSSL does throw an
+	// error if it's not there. So lets add it.
+	enc = append(enc, '\n')
+
 	err = os.MkdirAll(path.Dir(a.storageFile), 0755)
 	if err != nil {
 		return err

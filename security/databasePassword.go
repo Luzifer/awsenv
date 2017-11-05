@@ -6,14 +6,12 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io/ioutil"
-	"math/rand"
 	"net/http"
 	"os"
 	"os/exec"
 	"strings"
-	"time"
 
-	"github.com/satori/go.uuid"
+	openssl "github.com/Luzifer/go-openssl"
 )
 
 // DatabasePassword stores a non retrievable password and includes the
@@ -105,28 +103,23 @@ func (p *DatabasePassword) KillLockAgent(filename string) error {
 // Encrypt uses the password stored in the DatabasePassword storage to encrypt
 // the given message with AES256 and returns the encrypted message for storing
 func (p *DatabasePassword) Encrypt(in []byte) ([]byte, error) {
-	rand.Seed(time.Now().UnixNano())
-	key := fmt.Sprintf("%x", sha256.Sum256([]byte(p.password)))[17 : 17+32]
-	ivInt := rand.Intn(63 - aes.BlockSize)
-	iv := fmt.Sprintf("%x", sha256.Sum256([]byte(uuid.NewV4().String())))[ivInt : ivInt+aes.BlockSize]
-
-	block, err := aes.NewCipher([]byte(key))
-	if err != nil {
-		return []byte{}, err
-	}
-
-	encrypter := cipher.NewCFBEncrypter(block, []byte(iv))
-	encrypted := make([]byte, len(in))
-	encrypter.XORKeyStream(encrypted, in)
-
-	out := append([]byte(iv), encrypted...)
-
-	return out, nil
+	return openssl.New().EncryptString(p.password, string(in))
 }
 
 // Decrypt takes an encrypted message from Encrypt and decrypts it with a
 // corresponding method
 func (p *DatabasePassword) Decrypt(in []byte) ([]byte, error) {
+	out, err := openssl.New().DecryptString(p.password, string(in))
+	if err == nil {
+		// Decrypt with OpenSSL compatible encryption worked
+		return out, nil
+	}
+
+	// Fallback to previous decryption method to read old formats
+	return p.deprecatedDecrypt(in)
+}
+
+func (p *DatabasePassword) deprecatedDecrypt(in []byte) ([]byte, error) {
 	key := fmt.Sprintf("%x", sha256.Sum256([]byte(p.password)))[17 : 17+32]
 	iv := in[0:aes.BlockSize]
 
